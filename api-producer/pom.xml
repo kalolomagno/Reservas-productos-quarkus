@@ -66,7 +66,7 @@
             <artifactId>quarkus-hibernate-validator</artifactId>
         </dependency>
 
-        <!-- Persistence: Reservation entity and repository -->
+        <!-- Persistence: Reservation com.nttdata.apps.reservation.producer.entity and repository -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-hibernate-orm-panache</artifactId>
