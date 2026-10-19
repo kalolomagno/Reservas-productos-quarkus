@@ -1,4 +1,4 @@
-# Sistema de Reservas de Productos Seguras
+# Sistema de Reservas de Productos
 
 ## 1. Descripción del proyecto
 
@@ -131,7 +131,7 @@ Esta sección permite validar la infraestructura antes de ejecutar `api-producer
 
 La validación comprueba que Podman, Kafka, Schema Registry, PostgreSQL, el tópico Kafka, el esquema Avro y las tablas de base de datos estén disponibles correctamente.
 
-### Prerrequisitos
+### Pre-requisitos
 
 Se requiere tener instalados:
 
@@ -263,7 +263,7 @@ El script realiza las siguientes acciones:
 
 ---
 
-### 10.6. Validar los contenedores
+### Validar los contenedores
 
 Verificar que todos los contenedores se encuentren en ejecución:
 

@@ -1,0 +1,98 @@
+quarkus:
+  application:
+    name: reservation-producer
+  http:
+    port: 8182
+  datasource:
+    db-kind: postgresql
+    username: ${APP_DB_USERNAME}
+    password: ${APP_DB_PASSWORD}
+    jdbc:
+      url: ${APP_DB_JDBC_URL}
+      max-size: 10
+      min-size: 2
+      acquisition-timeout: 5S
+  hibernate-orm:
+    database:
+      generation: none
+    log:
+      sql: false
+      format-sql: true
+
+  # The project uses the infrastructure started through infra-podman.
+  # Quarkus must not automatically start Kafka or PostgreSQL Dev Services.
+  devservices:
+    enabled: false
+  kafka:
+    devservices:
+      enabled: false
+  rest-client:
+    dummyjson-api:
+      url: ${APP_DUMMYJSON_BASE_URL:https://dummyjson.com}
+      scope: jakarta.inject.Singleton
+      connect-timeout: 5000
+      read-timeout: 5000
+  log:
+    level: INFO
+    category:
+      "com.nttdata.apps.reservation":
+        level: DEBUG
+      "org.apache.kafka":
+        level: WARN
+
+# JWT validation configuration.
+# The producer validates received JWTs using the RSA public key.
+mp:
+  jwt:
+    verify:
+      issuer: ${app.security.jwt.issuer}
+      publickey:
+        location: ${APP_JWT_PUBLIC_KEY_LOCATION:file:../security/public.key}
+
+# JWT creation configuration.
+# The producer signs newly generated JWTs using the RSA private key.
+smallrye:
+  jwt:
+    sign:
+      key:
+        location: ${APP_JWT_PRIVATE_KEY_LOCATION:file:../security/private.key}
+
+# Application-specific configuration.
+app:
+  kafka:
+    topic: reservation-created-topic
+    bootstrap-servers: ${APP_KAFKA_BOOTSTRAP_SERVERS:localhost:19092}
+    schema:
+      registry:
+        url: ${APP_SCHEMA_REGISTRY_URL:http://localhost:8081}
+        auto-register: false
+        use-latest-version: true
+  security:
+    jwt:
+      issuer: reservation-producer
+      expiration-minutes: 60
+    clients:
+      operator:
+        client-id: ${APP_OPERATOR_CLIENT_ID}
+        client-secret: ${APP_OPERATOR_CLIENT_SECRET}
+        role: OPERATOR
+      admin:
+        client-id: ${APP_ADMIN_CLIENT_ID}
+        client-secret: ${APP_ADMIN_CLIENT_SECRET}
+        role: ADMIN
+  external-api:
+    dummyjson:
+      login-expires-in-minutes: 30
+
+"%dev":
+  quarkus:
+    hibernate-orm:
+      log:
+        sql: true
+        format-sql: true
+
+"%prod":
+  quarkus:
+    hibernate-orm:
+      log:
+        sql: false
