@@ -80,10 +80,16 @@ public class Reservation {
         updatedAt = Instant.now();
     }
 
-    public void updateDetails(String customerName, Integer quantity) {
+    public void updateDetails(
+            String customerName,
+            Integer quantity,
+            String productTitle
+    ) {
         this.customerName = customerName;
         this.quantity = quantity;
+        this.productTitle = productTitle;
     }
+
 
     public void cancel() {
         this.status = ReservationStatus.CANCELLED;

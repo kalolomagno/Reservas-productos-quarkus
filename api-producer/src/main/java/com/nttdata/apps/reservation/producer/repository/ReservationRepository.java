@@ -18,4 +18,8 @@ public class ReservationRepository implements PanacheRepositoryBase<Reservation,
     public List<Reservation> findByStatus(ReservationStatus status) {
         return list("status", status);
     }
+
+    public List<Reservation> listLatestFirst() {
+        return list("order by createdAt desc");
+    }
 }
