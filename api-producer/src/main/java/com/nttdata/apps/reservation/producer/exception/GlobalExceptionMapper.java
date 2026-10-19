@@ -5,6 +5,7 @@ import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
+import com.nttdata.apps.reservation.producer.exception.InvalidClientCredentialsException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -112,4 +113,15 @@ public class GlobalExceptionMapper {
 
         return propertyPath.substring(lastDotIndex + 1);
     }
+
+    @ServerExceptionMapper
+    public Response mapInvalidClientCredentials(
+            InvalidClientCredentialsException exception
+    ) {
+        return buildResponse(
+                Response.Status.UNAUTHORIZED,
+                exception.getMessage()
+        );
+    }
+
 }

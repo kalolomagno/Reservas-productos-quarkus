@@ -18,6 +18,9 @@ quarkus:
     log:
       sql: false
       format-sql: true
+  security:
+    jaxrs:
+      deny-unannotated-endpoints: true
 
   # The project uses the infrastructure started through infra-podman.
   # Quarkus must not automatically start Kafka or PostgreSQL Dev Services.

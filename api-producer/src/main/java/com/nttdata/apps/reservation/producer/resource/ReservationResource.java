@@ -16,6 +16,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.annotation.security.RolesAllowed;
 
 import java.net.URI;
 import java.util.List;
@@ -34,6 +35,7 @@ public class ReservationResource {
     }
 
     @POST
+    @RolesAllowed({"OPERATOR", "ADMIN"})
     public Response createReservation(
             @Valid CreateReservationRequest request
     ) {
@@ -50,12 +52,14 @@ public class ReservationResource {
     }
 
     @GET
+    @RolesAllowed({"OPERATOR", "ADMIN"})
     public List<ReservationResponse> getReservations() {
         return reservationService.findAll();
     }
 
     @GET
     @Path("/{reservationId}")
+    @RolesAllowed({"OPERATOR", "ADMIN"})
     public ReservationResponse getReservationById(
             @PathParam("reservationId") UUID reservationId
     ) {
@@ -64,6 +68,7 @@ public class ReservationResource {
 
     @PUT
     @Path("/{reservationId}")
+    @RolesAllowed({"OPERATOR", "ADMIN"})
     public ReservationResponse updateReservation(
             @PathParam("reservationId") UUID reservationId,
             @Valid UpdateReservationRequest request
@@ -73,6 +78,7 @@ public class ReservationResource {
 
     @DELETE
     @Path("/{reservationId}")
+    @RolesAllowed({"ADMIN"})
     public ReservationResponse cancelReservation(
             @PathParam("reservationId") UUID reservationId
     ) {
