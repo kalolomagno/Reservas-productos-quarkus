@@ -1,0 +1,50 @@
+# Java and Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven wrapper logs
+.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Visual Studio Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Environment files and local configuration
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+private.key
+privateKey.pem
+
+# Podman local persisted runtime data
+infra-podman/volumes/
+
+# Logs
+*.log
+log/

@@ -1,0 +1,27 @@
+services:
+
+  pg-reservation:
+    image: docker.io/bitnami/postgresql:latest
+    container_name: pg-reservation
+    hostname: pg-reservation
+    restart: unless-stopped
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRESQL_DATABASE: db_reservation
+      POSTGRESQL_USERNAME: reservation_user
+      POSTGRESQL_PASSWORD: reservation_password
+      TZ: America/Lima
+      PGTZ: America/Lima
+    volumes:
+      - pg-reservation-data:/bitnami/postgresql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:Z
+    networks:
+      - reservation-net
+
+networks:
+  reservation-net:
+    external: true
+
+volumes:
+  pg-reservation-data:

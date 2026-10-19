@@ -1,0 +1,48 @@
+{
+  "type": "record",
+  "name": "ReservationCreatedEvent",
+  "namespace": "com.nttdata.apps.reservation.avro",
+  "doc": "Evento emitido cuando una reserva de producto es creada correctamente.",
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Identificador unico del evento Kafka."
+    },
+    {
+      "name": "reservationId",
+      "type": "string",
+      "doc": "Identificador unico de la reserva."
+    },
+    {
+      "name": "customerName",
+      "type": "string",
+      "doc": "Nombre del cliente que solicita la reserva."
+    },
+    {
+      "name": "externalProductId",
+      "type": "int",
+      "doc": "Identificador del producto obtenido desde DummyJSON."
+    },
+    {
+      "name": "productTitle",
+      "type": "string",
+      "doc": "Nombre del producto validado mediante la API externa."
+    },
+    {
+      "name": "quantity",
+      "type": "int",
+      "doc": "Cantidad de unidades reservadas."
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "doc": "Estado inicial de la reserva. Valor esperado: CREATED."
+    },
+    {
+      "name": "createdAt",
+      "type": "string",
+      "doc": "Fecha y hora de creacion en formato ISO-8601."
+    }
+  ]
+}
