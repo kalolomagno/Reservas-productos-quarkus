@@ -636,7 +636,7 @@ security/
 La clave privada se agregará a `.gitignore`. El repositorio incluirá únicamente un archivo de ejemplo o instrucciones para generarla localmente.
 
 ---
-
+# TO_DO
 ## `api-consumer`
 
 Este módulo representa el servicio de **Auditoría y Resumen de Reservas**.
@@ -785,8 +785,13 @@ application-local.yml
 ```
 
 Para generar las llaves RSA y configurar variables locales, sin exponer credenciales reales.
-Se tiene que:
+Se tiene que ejectuar:
 
-1. a
-2. b
-3. c
+1. openssl genpkey -algorithm RSA -out private.key -pkeyopt rsa_keygen_bits:2048
+2. openssl rsa -pubout -in private.key -out public.key
+3. Seguir el ejemplo de .env.example para las .env
+
+## Github
+
+El proyecto se encuentra almacenado en:
+https://github.com/kalolomagno/Reservas-productos-quarkus
